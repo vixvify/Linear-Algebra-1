@@ -1,4 +1,4 @@
-import luDecomposition from "./luDecomposition.service";
+import luDecomposition from "./luDecomposition";
 
 export default function luSolve(A: number[][], b: number[]) {
   const { L, U } = luDecomposition(A);

@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import gaussEliminationPivot from "@/modules/GaussElimination/gaussElimination";
 import gaussJordan from "@/modules/GaussJordan/gaussJordan";
 import inverseSolve from "@/modules/Inverse/inverseSolve";
-import luSolve from "@/modules/Lu/luSolve.service";
+import luSolve from "@/modules/Lu/luSolve";
 import parseEquations from "@/modules/parseEquations";
 import matrixToPrettyString from "@/modules/matrixToPrettyString";
 
