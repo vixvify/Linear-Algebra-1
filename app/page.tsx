@@ -50,14 +50,12 @@ export default function LinearSystemUI() {
 
   return (
     <div className="min-h-screen relative overflow-hidden bg-[#0b0f1a] text-slate-100">
-      {/* background glow */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute -top-40 -left-40 h-105 w-105 rounded-full bg-fuchsia-600/20 blur-[120px]" />
         <div className="absolute top-1/3 -right-40 h-105 w-105 rounded-full bg-cyan-500/20 blur-[120px]" />
       </div>
 
       <div className="relative mx-auto max-w-6xl px-4 py-14 space-y-10">
-        {/* header */}
         <div className="text-center space-y-2">
           <h1 className="text-4xl font-semibold tracking-tight">
             Linear System Solver
@@ -67,7 +65,6 @@ export default function LinearSystemUI() {
           </p>
         </div>
 
-        {/* equation */}
         <section
           className="
             rounded-2xl border border-white/10
