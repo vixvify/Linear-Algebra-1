@@ -15,25 +15,33 @@ export default function LinearSystemUI() {
   const result = useMemo(() => {
     if (!equation || !methods) return null;
 
-    const { A, b } = parseEquations(equation);
+    try {
+      const { A, b } = parseEquations(equation);
 
-    if (methods === "GaussElimination") {
-      return gaussEliminationPivot(A, b);
+      if (methods === "GaussElimination") {
+        return { ok: true, x: gaussEliminationPivot(A, b) };
+      }
+
+      if (methods === "GaussJordan") {
+        return { ok: true, x: gaussJordan(A, b) };
+      }
+
+      if (methods === "Lu") {
+        return { ok: true, x: luSolve(A, b) };
+      }
+
+      if (methods === "Inverse") {
+        return { ok: true, x: inverseSolve(A, b).x };
+      }
+
+      return null;
+    } catch (err) {
+      console.error(err);
+      return {
+        ok: false,
+        message: "Cannnot Solve This Equation",
+      };
     }
-
-    if (methods === "GaussJordan") {
-      return gaussJordan(A, b);
-    }
-
-    if (methods === "Lu") {
-      return luSolve(A, b);
-    }
-
-    if (methods === "Inverse") {
-      return inverseSolve(A, b).x;
-    }
-
-    return null;
   }, [equation, methods]);
 
   const inverse_matrix = useMemo(() => {
@@ -208,8 +216,10 @@ export default function LinearSystemUI() {
                     }
                   `}
                 >
-                  {result ? (
-                    result.map((v, i) => (
+                  {result &&
+                    result.x &&
+                    result.ok &&
+                    result.x.map((v, i) => (
                       <div
                         key={i}
                         className="
@@ -230,9 +240,10 @@ export default function LinearSystemUI() {
                       >
                         x{i + 1} = {v.toFixed(3)}
                       </div>
-                    ))
-                  ) : (
-                    <div className="text-sm text-slate-500">No result</div>
+                    ))}
+                  {!result && <div className="text-red-500">No Answer</div>}
+                  {result && !result.ok && (
+                    <div className="text-red-500">{result.message}</div>
                   )}
                 </div>
               </div>
