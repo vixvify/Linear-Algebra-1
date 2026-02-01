@@ -39,7 +39,7 @@ export default function LinearSystemUI() {
       console.error(err);
       return {
         ok: false,
-        message: "Cannnot Solve This Equation",
+        message: "Cannot Solve This Equation",
       };
     }
   }, [equation, methods]);
