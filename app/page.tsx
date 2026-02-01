@@ -194,7 +194,7 @@ export default function LinearSystemUI() {
             >
               <div className="space-y-3">
                 <div className="text-xs uppercase tracking-wider text-slate-400">
-                  solution
+                  solution ({methods})
                 </div>
 
                 <div
