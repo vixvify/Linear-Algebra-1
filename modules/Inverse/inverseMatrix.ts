@@ -8,10 +8,8 @@ export default function inverseMatrix(A: number[][]) {
   ]);
 
   for (let i = 0; i < n; i++) {
-    // ----------------------------
     // เลือกแถว pivot (partial pivoting)
     // หาแถวที่ |aug[row][i]| มากที่สุด
-    // ----------------------------
     let maxRow = i;
     for (let k = i + 1; k < n; k++) {
       if (Math.abs(aug[k][i]) > Math.abs(aug[maxRow][i])) {
@@ -19,9 +17,7 @@ export default function inverseMatrix(A: number[][]) {
       }
     }
 
-    // ----------------------------
     // สลับแถว i กับ maxRow
-    // ----------------------------
     if (maxRow !== i) {
       [aug[i], aug[maxRow]] = [aug[maxRow], aug[i]];
     }
@@ -34,17 +30,13 @@ export default function inverseMatrix(A: number[][]) {
       throw new Error("Matrix is singular or nearly singular");
     }
 
-    // ----------------------------
     // ทำให้ pivot เป็น 1
-    // ----------------------------
     for (let j = 0; j < 2 * n; j++) {
       aug[i][j] /= pivot;
     }
 
-    // ----------------------------
     // ทำให้สมาชิกคอลัมน์ i
     // ในแถวอื่นเป็น 0
-    // ----------------------------
     for (let k = 0; k < n; k++) {
       if (k === i) continue;
 
