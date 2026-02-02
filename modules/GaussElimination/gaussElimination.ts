@@ -1,14 +1,12 @@
 export default function gaussEliminationPivot(A: number[][], b: number[]) {
-
   const n = A.length;
 
   // สร้างสำเนา matrix A และ vector b เพื่อไม่ให้ไปแก้ค่าต้นฉบับ
-  const M = A.map(row => [...row]);
+  const M = A.map((row) => [...row]);
   const B = [...b];
 
   // Forward Elimination ทำให้ matrix อยู่ในรูปสามเหลี่ยมบน
   for (let k = 0; k < n - 1; k++) {
-
     // 1) Partial Pivoting เลือกแถวที่มีค่าสัมบูรณ์ของ pivot มากที่สุดเพื่อให้การคำนวณเสถียรขึ้น
     let maxRow = k;
     let maxVal = Math.abs(M[k][k]);
@@ -20,9 +18,8 @@ export default function gaussEliminationPivot(A: number[][], b: number[]) {
       }
     }
 
-    // ถ้า pivot = 0 แปลว่าไม่สามารถหาคำตอบแบบ unique ได้
-    if (M[maxRow][k] === 0) {
-      throw new Error("Matrix is singular (no unique solution)");
+    if (Math.abs(maxVal) < 1e-12) {
+      throw new Error("Matrix is singular");
     }
 
     // สลับแถว เพื่อให้ pivot อยู่ตำแหน่งบนสุด
@@ -53,6 +50,13 @@ export default function gaussEliminationPivot(A: number[][], b: number[]) {
     // ย้ายตัวแปรที่รู้ค่าแล้วไปอีกฝั่ง
     for (let j = i + 1; j < n; j++) {
       sum -= M[i][j] * x[j];
+    }
+    if (Math.abs(M[i][i]) < 1e-12) {
+      if (Math.abs(sum) < 1e-12) {
+        throw new Error("Infinite solutions");
+      } else {
+        throw new Error("No solution");
+      }
     }
 
     // หาค่าตัวแปรตัวที่ i
